@@ -1,4 +1,4 @@
-
+let detailspokemon;
 const pokeApi = {}
 
 function convertPokeApiDetailToPokemon(pokeDetail) {
@@ -20,7 +20,7 @@ function convertPokeApiDetailToPokemon(pokeDetail) {
 pokeApi.getPokemonDetail = (pokemon) => {
     return fetch(pokemon.url)
         .then((response) => response.json())
-        .then(convertPokeApiDetailToPokemon)
+        .then((response) => detailspokemon = convertPokeApiDetailToPokemon(response))
 }
 
 pokeApi.getPokemons = (offset = 0, limit = 5) => {
@@ -32,4 +32,13 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => {
         .then((pokemons) => pokemons.map(pokeApi.getPokemonDetail))
         .then((detailRequests) => Promise.all(detailRequests))
         .then((pokemonsDetails) => pokemonsDetails)
+}
+
+function openWin(name) {
+    console.log(name)
+    const myWindow = window.open("", "");
+    myWindow.document.write(
+        name.outerHTML
+    )
+
 }
